@@ -1,10 +1,13 @@
 {
   "files": {
+    "main.css": "/reactSearchAlbums/static/css/main.5d8e82d0.css",
     "main.js": "/reactSearchAlbums/static/js/main.b0c6bda4.js",
     "index.html": "/reactSearchAlbums/index.html",
+    "main.5d8e82d0.css.map": "/reactSearchAlbums/static/css/main.5d8e82d0.css.map",
     "main.b0c6bda4.js.map": "/reactSearchAlbums/static/js/main.b0c6bda4.js.map"
   },
   "entrypoints": [
+    "static/css/main.5d8e82d0.css",
     "static/js/main.b0c6bda4.js"
   ]
 }
