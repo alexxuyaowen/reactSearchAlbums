@@ -22,7 +22,11 @@ class App extends React.Component {
                 this._isLoading(false);
                 this.setState({albumsArr: [...data.results]});
             })
-        this.setState({resultInfo: `${this.state.limit}/${this.state.albumsArr.length} results for "${this.state.userInput}"`});
+            
+            setTimeout(()=>this.setState({
+                limit: Math.min(this.state.limit, this.state.albumsArr.length),
+                resultInfo: `${this.state.limit}/${this.state.albumsArr.length} results for "${this.state.userInput}"`
+            }), 100);
     }
 
     _isLoading(state) {
@@ -64,8 +68,9 @@ class App extends React.Component {
             <div className="nav-bar">
                 <form className="search-bar">
                     <input type="text" id="user-input" onChange={e => this.setState({ userInput: e.target.value })}
+                        onKeyPress={e => {if (e.key === "Enter") {this._fetchAPI(); e.target.value=""}}}
                         onFocus={this._widen} name="search" placeholder="Search..." autoComplete="off" required />
-                    <input type="submit" id="submitBtn" value="🔍" onClick={e => { this._fetchAPI(); e.preventDefault() }} />
+                    <input type="submit" id="submitBtn" value="🔍" onClick={e => { this._fetchAPI(); e.preventDefault(); e.target.value=""}} />
                 </form>
             </div>
 
@@ -83,7 +88,7 @@ class App extends React.Component {
                 const resultCount = this.state.albumsArr.length;
                 this.setState({
                     limit: Math.min(resultCount, this.state.limit + 5),
-                    resultInfo: `${this.state.limit}/${this.state.albumsArr.length} results for "${this.state.userInput}"`
+                    resultInfo: `${this.state.limit+5}/${this.state.albumsArr.length} results for "${this.state.userInput}"`
                 });
                 document.getElementById("loadMore").style.display = this.state.limit >= resultCount ? "none" : "block";
             }
